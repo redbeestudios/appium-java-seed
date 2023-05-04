@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group = 'io.redbee'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'io.appium', name: 'java-client', version: '8.3.0'
+    testImplementation group: 'org.testng', name: 'testng', version: '7.7.1'
+}
+
+test {
+    useTestNG()
+}
