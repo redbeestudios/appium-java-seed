@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    implementation group: 'org.json', name: 'json', version: '20230227'
+
     implementation group: 'io.appium', name: 'java-client', version: '8.3.0', {
         because("We need Appium for Mobile Automation")
     }
@@ -31,8 +33,5 @@ dependencies {
 }
 
 test {
-    def groups = System.getProperty('groups', 'regression')
-    useTestNG() {
-        includeGroups groups
-    }
+    useTestNG()
 }
