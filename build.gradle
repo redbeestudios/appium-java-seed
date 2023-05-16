@@ -11,11 +11,11 @@ repositories {
 
 dependencies {
     implementation group: 'io.appium', name: 'java-client', version: '8.3.0'
-    implementation group: 'org.json', name: 'json', version: '20230227'
     testImplementation group: 'org.testng', name: 'testng', version: '7.7.1'
 
 }
 
 test {
     useTestNG()
+    systemProperties(System.getProperties()) 
 }
