@@ -10,10 +10,26 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'io.appium', name: 'java-client', version: '8.3.0'
     implementation group: 'org.json', name: 'json', version: '20230227'
-    testImplementation group: 'org.testng', name: 'testng', version: '7.7.1'
 
+    implementation group: 'io.appium', name: 'java-client', version: '8.3.0', {
+        because("We need Appium for Mobile Automation")
+    }
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.20.0', {
+        because("We need a tools for logs")
+    }
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.20.0', {
+        because("We need a tools for logs")
+    }
+    testImplementation group: 'org.testng', name: 'testng', version: '7.7.1', {
+        because("We need a Test Runner")
+    }
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.20.0', {
+        because("We need a tools for logs")
+    }
+    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.7', {
+        because("We need a provider for logs")
+    }
 }
 
 test {
