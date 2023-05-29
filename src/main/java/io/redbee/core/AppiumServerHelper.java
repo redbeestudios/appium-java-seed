@@ -77,7 +77,7 @@ public class AppiumServerHelper {
         return service;
     }
     public URL getUrl() {
-        LOGGER.log(Level.INFO,  "ESTA ES LA URL : " + service.getUrl().toString());
+        LOGGER.log(Level.INFO,  "URL is: " + service.getUrl().toString());
         return  service.getUrl();
     }
     

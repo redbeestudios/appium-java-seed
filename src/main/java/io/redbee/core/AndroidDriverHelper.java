@@ -8,9 +8,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+
 
 public class AndroidDriverHelper {
     private static AndroidDriverHelper instance;
@@ -39,11 +37,15 @@ public class AndroidDriverHelper {
         return driver;
     }
 
-    public void startDriver(AppiumServerHelper server) throws Exception {
-        startDriver(null, server);
+    public AppiumDriver  startDriver( ) throws Exception {
+        startDriver(null);
+        return getDriver();
     }
 
-    public void startDriver(String capabilitiesFile, AppiumServerHelper server) throws Exception {
+    public AppiumDriver  startDriver(String capabilitiesFile ) throws Exception {
+        AppiumServerHelper server = new AppiumServerHelper();
+        server.stop();
+        server.start();
         DesiredCapabilities capabilities;
         LOGGER.log(Level.INFO, "Driver starting...");
         cleanupEmulator();
@@ -60,13 +62,12 @@ public class AndroidDriverHelper {
             // Iniciar el driver de Appium
             driver = new AndroidDriver(server.getUrl(), capabilities);
             LOGGER.log(Level.INFO, "Driver started successfully");
-            // } catch (MalformedURLException e) {
-            // handleError(e, "Error when initializing the driver.",Level.SEVERE);
         } catch (TimeoutException e) {
             handleError(e, "Timeout when initializing the driver", Level.SEVERE);
         } catch (Exception e) {
             handleError(e, "Unknown error occurred while initializing the driver.", Level.SEVERE);
         }
+        return getDriver();
 
     }
 
@@ -87,7 +88,7 @@ public class AndroidDriverHelper {
 
     private void cleanupEmulator() throws Exception {
         // Detener el emulador de Android
-        stopAndroidEmulator();
+       stopAndroidEmulator();
 
         // Eliminar archivos temporales del emulador
         deleteEmulatorTempFiles();
