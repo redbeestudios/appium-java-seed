@@ -1,12 +1,6 @@
 package io.redbee.appium;
 
-
-import io.appium.java_client.PerformsTouchActions;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.ActionOptions;
-import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -19,7 +13,6 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import static java.time.Duration.ofMillis;
-import static java.time.Duration.ofSeconds;
 import static java.util.Collections.singletonList;
 
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -27,7 +20,7 @@ import io.appium.java_client.AppiumDriver;
 import io.redbee.core.AndroidDriverHelper;
 
 import io.redbee.core.AppiumServerHelper;
- 
+
 import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
@@ -39,19 +32,18 @@ public class BaseTest {
     protected WebDriverWait wait;
     protected AppiumServerHelper server;
 
-
     @BeforeClass
-   
+
     @Parameters("capabilitiesFile")
     public void setup(@Optional("capabilitiesDefault.properties") String capabilitiesFile) throws Exception {
         server = new AppiumServerHelper();
         server.stop();
         server.start();
-       
+
         System.out.println("Valor del parámetro capabilitiesFile: " + capabilitiesFile);
 
         androidDriverHelper = AndroidDriverHelper.getInstance();
-        androidDriverHelper.startDriver(capabilitiesFile,server);
+        androidDriverHelper.startDriver(capabilitiesFile, server);
         driver = androidDriverHelper.getDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     }
@@ -60,7 +52,6 @@ public class BaseTest {
     public void tearDown() throws Exception {
         androidDriverHelper.stopDriver();
     }
-
 
     private WebElement waitForElementVisibility(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
@@ -79,9 +70,9 @@ public class BaseTest {
     }
 
     public void horizontalSwipingTest(By locator) {
-        //xpath = By.xpath("(//android.view.ViewGroup[@content-desc='card'])[1]");
-        //WebElement swip = driver.findElement(locator);
-        
+        // xpath = By.xpath("(//android.view.ViewGroup[@content-desc='card'])[1]");
+        // WebElement swip = driver.findElement(locator);
+
         Point source = waitForElementVisibility(locator).getLocation();
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         Sequence sequence = new Sequence(finger, 0);
