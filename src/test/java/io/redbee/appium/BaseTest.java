@@ -36,7 +36,7 @@ public class BaseTest {
 
     protected AndroidDriverHelper androidDriverHelper;
     protected AppiumDriver driver;
-    protected static WebDriverWait wait;
+    protected WebDriverWait wait;
     protected AppiumServerHelper server;
 
 
@@ -53,16 +53,12 @@ public class BaseTest {
         androidDriverHelper = AndroidDriverHelper.getInstance();
         androidDriverHelper.startDriver(capabilitiesFile,server);
         driver = androidDriverHelper.getDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     }
 
     @AfterClass
     public void tearDown() throws Exception {
         androidDriverHelper.stopDriver();
-    }
-
-
-    public BaseTest() {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     }
 
 
